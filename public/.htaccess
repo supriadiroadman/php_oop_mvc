@@ -1,0 +1,13 @@
+#Mengarahkan url ke public/index.php bila file tidak ditemukan di folder public
+#index.php?url=test akan di tulis ulang oleh RewriteRule yang menangkap parameter url
+#http://localhost/phpoopmvc/index.php?url=test menjadi http://localhost/phpoopmvc/test
+#parameter url dijalankan oleh file Core.php melalui instansiasi di file index.php ($init = new Core;)
+
+<IfModule mod_rewrite.c>
+Options -Multiviews
+RewriteEngine On
+RewriteBase /sharepostsmvc/public
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
